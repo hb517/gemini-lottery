@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>제미또 100% 당첨 복권</title>
-<!-- 폰트 & 콘페티 라이브러리 -->
+<!-- 레트로 도트 폰트 & 콘페티 라이브러리 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/EarlyFontDiary.woff">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <style>
@@ -23,7 +23,7 @@
 
     body {
         margin: 0;
-        padding: 20px 15px 40px 15px;
+        padding: 15px 12px 40px 12px;
         min-height: 100vh;
         background-color: #fbee70;
         background-image: radial-gradient(#e6d34e 10%, transparent 11%);
@@ -35,75 +35,136 @@
         cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="%23ffd32a" stroke="%23222" stroke-width="3"/><text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-size="16" font-weight="bold" fill="%23d35400">$</text></svg>') 18 18, auto;
     }
 
-    /* 온보딩 모달 */
+    /* 0. 온보딩 가이드 & 키워드 입력 모달 */
     .onboarding-overlay {
         position: fixed !important;
         top: 0 !important; left: 0 !important;
         width: 100vw !important; height: 100vh !important;
-        background: rgba(0, 0, 0, 0.7) !important;
+        background: rgba(0, 0, 0, 0.75) !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
         z-index: 999999 !important;
-        padding: 20px;
+        padding: 16px;
     }
     .onboarding-modal {
         background: #fff;
         border: 4px solid #222;
         border-radius: 20px;
         box-shadow: 8px 8px 0px #222;
-        padding: 25px 20px;
+        padding: 22px 18px;
         width: 100%;
-        max-width: 320px;
+        max-width: 350px;
         text-align: center;
     }
     .modal-tag {
         display: inline-block;
-        background: #ff5252;
+        background: #ff4757;
         color: white;
         border: 2px solid #222;
         border-radius: 8px;
         padding: 2px 8px;
-        font-size: 14px;
-        margin-bottom: 8px;
+        font-size: 12px;
+        margin-bottom: 6px;
     }
     .onboarding-modal h2 {
         margin: 0 0 6px 0;
-        font-size: 22px;
+        font-size: 20px;
         color: #222;
     }
-    .onboarding-modal p {
-        font-size: 13px;
+    .guide-desc {
+        font-size: 12px;
         color: #555;
-        margin: 0 0 18px 0;
+        margin: 0 0 14px 0;
         line-height: 1.4;
     }
-    .input-group {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 20px;
+
+    /* Step 1: 사인업 바로가기 버튼 */
+    .signup-link-btn {
+        display: block;
+        width: 100%;
+        background: #1a73e8;
+        color: white;
+        text-decoration: none;
+        padding: 12px;
+        border: 2.5px solid #222;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 3px 3px 0px #222;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+    .signup-link-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px #222;
+    }
+
+    /* Step 2: 프롬프트 복붙 박스 */
+    .prompt-box {
+        background: #fffdf0;
+        border: 2px dashed #222;
+        border-radius: 10px;
+        padding: 10px;
         text-align: left;
+        margin-bottom: 14px;
+    }
+    .prompt-label {
+        font-size: 11px;
+        color: #ff4757;
+        font-weight: bold;
+        margin-bottom: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .copy-btn {
+        background: #fffa65;
+        border: 1.5px solid #222;
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 10px;
+        cursor: pointer;
+        font-family: inherit;
+    }
+    .prompt-content {
+        font-size: 12px;
+        color: #222;
+        line-height: 1.4;
+        word-break: keep-all;
+        user-select: text;
+        -webkit-user-select: text;
+    }
+
+    /* Step 3: 키워드 입력 필드 (순수 흰색 네모칸) */
+    .input-group {
+        text-align: left;
+        margin-bottom: 16px;
     }
     .input-group label {
-        font-size: 13px;
+        font-size: 12px;
         color: #222;
         font-weight: bold;
+        display: block;
+        margin-bottom: 4px;
     }
     .input-group input {
         width: 100%;
+        height: 44px;
         padding: 10px 12px;
-        border: 3px solid #222;
+        border: 2.5px solid #222;
         border-radius: 10px;
         font-size: 15px;
         font-family: inherit;
-        background: #fffdf0;
+        background: #ffffff; /* 순수 흰색 */
         outline: none;
+        box-sizing: border-box;
     }
     .input-group input:focus {
-        background: #fff;
         box-shadow: 3px 3px 0px #222;
+        border-color: #1a73e8;
     }
+
     .start-btn {
         width: 100%;
         background: #2ed573;
@@ -111,7 +172,7 @@
         border: 3px solid #222;
         border-radius: 12px;
         padding: 12px;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         font-family: inherit;
         box-shadow: 4px 4px 0px #222;
@@ -122,7 +183,7 @@
         box-shadow: 2px 2px 0px #222;
     }
 
-    /* 티커 바 */
+    /* 1. 상단 티커 바 */
     .ticker-bar {
         width: 100%;
         max-width: 360px;
@@ -131,7 +192,7 @@
         border-radius: 14px;
         box-shadow: 4px 4px 0px #222;
         padding: 6px 12px;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -166,7 +227,7 @@
         100% { transform: translateY(0); }
     }
 
-    /* 복권 카드 */
+    /* 2. 손그림 핑크 복권 카드 */
     .ticket-card {
         width: 100%;
         max-width: 360px;
@@ -174,18 +235,20 @@
         border: 4px solid #222;
         border-radius: 24px;
         box-shadow: 8px 8px 0px #222;
-        padding: 16px 16px 20px 16px;
+        padding: 16px 16px 18px 16px;
         position: relative;
         transform: rotate(-1.5deg);
+        transition: transform 0.2s;
     }
+    .ticket-card:hover { transform: rotate(0deg); }
 
     .ticket-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
-    .corner-doodle { font-size: 26px; }
+    .corner-doodle { font-size: 24px; }
     .ticket-title {
         font-size: 32px;
         color: #fff;
@@ -201,10 +264,10 @@
 
     .jackpot-banner {
         text-align: center;
-        font-size: 15px;
+        font-size: 14px;
         color: #fff;
         text-shadow: -1.5px -1.5px 0 #222, 1.5px -1.5px 0 #222, -1.5px 1.5px 0 #222, 1.5px 1.5px 0 #222;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -215,16 +278,17 @@
         color: #fff;
         border: 2px solid #222;
         border-radius: 50%;
-        width: 26px; height: 26px;
+        width: 24px; height: 24px;
         display: inline-flex;
         align-items: center; justify-content: center;
         font-size: 11px;
     }
 
+    /* 3. 스크래치 박스 */
     .scratch-container {
         position: relative;
         width: 100%;
-        height: 140px;
+        height: 135px;
         background: #ffffff;
         border: 3.5px dashed #222;
         border-radius: 16px;
@@ -239,15 +303,15 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 10px;
+        padding: 8px;
     }
     .prize-doodle-icon {
-        font-size: 40px;
+        font-size: 38px;
         margin-bottom: 2px;
         filter: drop-shadow(2px 2px 0px #222);
     }
     .prize-name {
-        font-size: 22px;
+        font-size: 21px;
         color: #ff3838;
         margin: 0;
         text-shadow: 1px 1px 0px #222;
@@ -255,7 +319,7 @@
     .prize-sub {
         font-size: 12px;
         color: #444;
-        margin-top: 4px;
+        margin-top: 3px;
     }
 
     #scratch-canvas {
@@ -275,7 +339,7 @@
         font-weight: bold;
     }
 
-    /* 수정된 당첨 안내 팝업 메시지 박스 */
+    /* 4. 미션 & 보상 인증 박스 */
     .result-box {
         margin-top: 20px;
         width: 100%;
@@ -284,15 +348,14 @@
         border: 4px solid #222;
         border-radius: 20px;
         box-shadow: 6px 6px 0px #222;
-        padding: 20px 18px;
+        padding: 20px 16px;
         text-align: left;
         display: none;
         animation: bounce 0.4s;
-        box-sizing: border-box;
     }
     .result-box h3 {
         margin: 0 0 14px 0;
-        font-size: 17px;
+        font-size: 16px;
         color: #1a73e8;
         text-align: center;
         letter-spacing: -0.5px;
@@ -303,7 +366,7 @@
         margin: 0 0 16px 0;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
     }
     .step-list li {
         font-size: 13px;
@@ -328,13 +391,8 @@
         flex-shrink: 0;
         margin-top: 1px;
     }
-    .step-list strong {
-        color: #d93025;
-    }
-    .step-list span.highlight {
-        color: #1a73e8;
-        font-weight: bold;
-    }
+    .step-list strong { color: #d93025; }
+    .step-list span.highlight { color: #1a73e8; font-weight: bold; }
 
     .action-btn {
         display: block;
@@ -349,7 +407,6 @@
         font-weight: bold;
         text-decoration: none;
         box-shadow: 4px 4px 0px #222;
-        box-sizing: border-box;
     }
     .action-btn:active {
         transform: translate(2px, 2px);
@@ -365,39 +422,50 @@
 </head>
 <body>
 
-<!-- 온보딩 모달 -->
+<!-- 0. 온보딩 가이드 & 키워드 입력 모달 -->
 <div class="onboarding-overlay" id="onboarding-modal">
     <div class="onboarding-modal">
-        <div class="modal-tag">100% 당첨 복권</div>
+        <div class="modal-tag">Gemini × 제미또</div>
         <h2>✏️ 럭키 제미또 입장</h2>
-        <p>복권을 긁기 전에 학과와 닉네임을 적어줘!</p>
-        <div class="input-group">
-            <div>
-                <label>내 학과</label>
-                <input type="text" id="user-dept" placeholder="예: 디지털콘텐츠학과" autocomplete="off">
+        <p class="guide-desc">Gemini 학생 무료 가입 후 프롬프트를 입력해<br>출력된 <strong>행운 키워드</strong>를 넣어야 복권이 열립니다!</p>
+        
+        <!-- Step 1: 바로가기 링크 버튼 -->
+        <a href="https://gemini.google/students/?utm_source=student&utm_medium=social&utm_campaign=microsite_campus_kyunghee-ambassador" target="_blank" class="signup-link-btn">
+            1. 제미나이 12개월 무료 가입하기 🚀
+        </a>
+
+        <!-- Step 2: 프롬프트 복사 영역 -->
+        <div class="prompt-box">
+            <div class="prompt-label">
+                <span>2. 제미나이에 질문할 프롬프트</span>
+                <button type="button" class="copy-btn" onclick="copyPrompt()">복사 📋</button>
             </div>
-            <div>
-                <label>내 닉네임</label>
-                <input type="text" id="user-nick" placeholder="예: 과제탈출사자" autocomplete="off">
-            </div>
+            <div class="prompt-content" id="prompt-text">2학기 과제 A+ 맞을 수 있는 나만의 행운의 제미또 키워드 1개만 딱 알려줘!</div>
         </div>
-        <button type="button" class="start-btn" onclick="startEvent()">동전 들고 긁으러 가기! 🪙</button>
+
+        <!-- Step 3: 키워드 입력 필드 (placeholder 없는 깨끗한 흰색 네모칸) -->
+        <div class="input-group">
+            <label>3. Gemini가 알려준 행운 키워드 입력</label>
+            <input type="text" id="user-keyword" autocomplete="off">
+        </div>
+
+        <button type="button" class="start-btn" onclick="startEvent()">황금 복권 긁으러 가기! 🪙</button>
     </div>
 </div>
 
-<!-- 상단 티커 바 -->
+<!-- 1. 상단 티커 바 -->
 <div class="ticker-bar">
     <div class="ticker-tag">LIVE</div>
     <div class="ticker-scroll">
         <ul class="ticker-list" id="ticker-list">
-            <li>🎉 컴공과 박*준님 [배민 10만원] 당첨!</li>
-            <li>🍫 미디어과 김*현님 [빼빼로] 당첨!</li>
-            <li>🍭 경영학과 이*진님 [츄파춥스] 당첨!</li>
+            <li>🎉 [배민 10만원] 잭팟 당첨자 탄생!</li>
+            <li>🍫 [올에이플]님 빼빼로 기프티콘 당첨!</li>
+            <li>🍭 [과제탈출]님 츄파춥스 당첨!</li>
         </ul>
     </div>
 </div>
 
-<!-- 복권 카드 -->
+<!-- 2. 제미또 복권 카드 -->
 <div class="ticket-card">
     <div class="ticket-header">
         <div class="corner-doodle">🍞</div>
@@ -410,11 +478,12 @@
         <strong>배민 10만원권 / 빼빼로 대방출!</strong>
     </div>
 
+    <!-- 스크래치 박스 -->
     <div class="scratch-container">
         <div class="result-layer">
             <div class="prize-doodle-icon" id="prize-icon">🍫</div>
             <div class="prize-name" id="prize-title">빼빼로 기프티콘</div>
-            <div class="prize-sub">당첨을 축하합니다! 🎉</div>
+            <div class="prize-sub" id="user-keyword-display">당첨을 축하합니다! 🎉</div>
         </div>
         <canvas id="scratch-canvas"></canvas>
     </div>
@@ -425,44 +494,45 @@
     </div>
 </div>
 
-<!-- 요청 문구가 적용된 하단 안내 팝업 -->
+<!-- 3. 당첨 후 안내 카드 -->
 <div class="result-box" id="result-box">
     <h3>⚡ 축하합니다! 1분 만에 경품 수령 완료하기</h3>
     <ul class="step-list">
         <li>
             <span class="step-num">1</span>
-            <div><span class="highlight">@please_gemini</span> 인스타 프로필 링크에서 <strong>제미나이 12개월 무료</strong> 가입하기</div>
+            <div><span class="highlight">@please_gemini</span> 프로필 링크에서 <strong>제미나이 12개월 무료</strong> 가입 확인</div>
         </li>
         <li>
             <span class="step-num">2</span>
-            <div>가입 완료 후 받은 <strong>환영 이메일(오늘 날짜 포함)</strong> 캡처하기</div>
+            <div>제미나이에 <strong>"행운 키워드" 물어본 대화창</strong> + <strong>현재 복권 당첨 화면</strong> 캡처하기</div>
         </li>
         <li>
             <span class="step-num">3</span>
-            <div><span class="highlight">@please_gemini</span> DM으로 캡처본 보내면 기프티콘 즉시 지급! 🚀</div>
+            <div><span class="highlight">@please_gemini DM</span>으로 캡처본 전송 시 기프티콘 즉시 발송! 🚀</div>
         </li>
     </ul>
-    <a href="https://instagram.com/please_gemini" target="_blank" class="action-btn">@please_gemini 바로가기 👉</a>
+    <a href="https://instagram.com/please_gemini" target="_blank" class="action-btn">@please_gemini DM 보내러 가기 👉</a>
 </div>
 
 <script>
-    let userDept = "경희대";
-    let userNick = "익명";
+    let userKeyword = "럭키";
+
+    function copyPrompt() {
+        const promptText = document.getElementById('prompt-text').innerText;
+        navigator.clipboard.writeText(promptText).then(() => {
+            alert('프롬프트가 복사되었습니다! 제미나이 대화창에 붙여넣기 해보세요.');
+        }).catch(() => {
+            alert('복사에 실패했습니다. 문구를 직접 드래그해서 복사해주세요.');
+        });
+    }
 
     function startEvent() {
-        const deptInput = document.getElementById('user-dept').value.trim();
-        const nickInput = document.getElementById('user-nick').value.trim();
-
-        if (!deptInput || !nickInput) {
-            alert('학과와 닉네임을 모두 적어줘!');
-            return;
-        }
-
-        userDept = deptInput;
-        userNick = nickInput;
+        const keywordInput = document.getElementById('user-keyword').value.trim();
+        userKeyword = keywordInput.length > 0 ? keywordInput : "럭키";
 
         document.getElementById('onboarding-modal').style.setProperty('display', 'none', 'important');
-        document.getElementById('user-info-tag').innerText = `✏️ ${userDept} ${userNick}님의 복권`;
+        document.getElementById('user-info-tag').innerText = `🔑 행운 키워드: ${userKeyword}`;
+        document.getElementById('user-keyword-display').innerText = `행운 부적: [${userKeyword}] 대박 기원! 🎉`;
 
         initCanvas();
     }
@@ -553,7 +623,7 @@
 
                 const tickerList = document.getElementById('ticker-list');
                 const newLi = document.createElement('li');
-                newLi.innerText = `🔥 ${userDept} ${userNick}님 [${winningPrize.name}] 방금 당첨!`;
+                newLi.innerText = `🔥 [${userKeyword}]님 [${winningPrize.name}] 방금 당첨!`;
                 newLi.style.color = '#ff3838';
                 tickerList.insertBefore(newLi, tickerList.firstChild);
             }
